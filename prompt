@@ -1,13 +1,34 @@
-"Currently my code works well. It connects to my node and gives me the 
-information i asked for. 'main.py' will get three pieces of data which are
-'chain', 'blocks' and 'bestblockhash'. I want you to modify the 'coreQuery.py'
-file to ask for the data you need to create a front end solution to what 'main.py'
-will produce when ran. I have an example of exactly the template id like you to use
-to complete the front end already. The 'memePoolGUI.html' will need to be compatible
- with the 'main.py' file. The 'main.py' file will need to be compatible with the 
- 'coreQuery.py' file. Lastly the 'commands.md' file should give you all the access 
- syntax necessary for modifying 'coreQuery.py'. I dont want any changes dont to how 
- the memePoolGUI.html will look in style and class. I just want you to modify how it
-  recieves data. That data should be all set to go from my already working rpc. You 
-  have everything you need in this folder to complete the job and there should be no
-   reason why anything doesnt work."
+Task: Enhance the Bitcoin node data retrieval system and create a compatible front-end solution.
+
+Current State:
+1. 'main.py' successfully connects to the Bitcoin node and retrieves 'chain', 'blocks', and 'bestblockhash'.
+2. 'coreQuery.py' handles the RPC queries to the Bitcoin node.
+3. 'memePoolGUI.html' exists as a template for the front-end display.
+4. 'commands.md' contains all necessary RPC command syntax.
+
+Requirements:
+1. Modify 'coreQuery.py':
+   - Expand the data retrieval to include all information needed for the front-end display.
+   - Ensure compatibility with 'main.py'.
+   - Use only commands listed in 'commands.md'.
+
+2. Update 'main.py':
+   - Adjust to work with the modified 'coreQuery.py'.
+   - Prepare data in a format suitable for the front-end.
+
+3. Adapt 'memePoolGUI.html':
+   - Modify only the data reception and display logic.
+   - Maintain all existing styles and classes.
+   - Ensure compatibility with the data format provided by 'main.py'.
+
+Constraints:
+- Do not alter the visual design or layout of 'memePoolGUI.html'.
+- Use only the existing files and RPC commands provided.
+- Assume all necessary RPC connectivity is already functional.
+
+Deliverables:
+1. Modified 'coreQuery.py' with expanded data retrieval.
+2. Updated 'main.py' that works with the new 'coreQuery.py' and prepares data for the front-end.
+3. Adapted 'memePoolGUI.html' that correctly receives and displays the new data.
+
+Please provide the modified code for each file, explaining the changes made and how they work together to achieve the desired outcome.
