@@ -1,0 +1,13 @@
+"Currently my code works well. It connects to my node and gives me the 
+information i asked for. 'main.py' will get three pieces of data which are
+'chain', 'blocks' and 'bestblockhash'. I want you to modify the 'coreQuery.py'
+file to ask for the data you need to create a front end solution to what 'main.py'
+will produce when ran. I have an example of exactly the template id like you to use
+to complete the front end already. The 'memePoolGUI.html' will need to be compatible
+ with the 'main.py' file. The 'main.py' file will need to be compatible with the 
+ 'coreQuery.py' file. Lastly the 'commands.md' file should give you all the access 
+ syntax necessary for modifying 'coreQuery.py'. I dont want any changes dont to how 
+ the memePoolGUI.html will look in style and class. I just want you to modify how it
+  recieves data. That data should be all set to go from my already working rpc. You 
+  have everything you need in this folder to complete the job and there should be no
+   reason why anything doesnt work."
