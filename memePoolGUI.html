@@ -1,0 +1,197 @@
+<html><head><base href="https://mempool-explorer.ai/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mempool Explorer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1d1f31;
+    color: #ffffff;
+  }
+  .header {
+    background-color: #2d3348;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  .main {
+    padding: 2rem;
+  }
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background-color: #2d3348;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .chart {
+    width: 100%;
+    height: 200px;
+    background-color: #3d4258;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+  .transactions {
+    margin-top: 2rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 1px solid #3d4258;
+  }
+  th {
+    background-color: #2d3348;
+  }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Mempool Explorer</div>
+    <nav class="nav">
+      <a href="mempool">Mempool</a>
+      <a href="blocks">Blocks</a>
+      <a href="tx">Transactions</a>
+      <a href="api">API</a>
+    </nav>
+  </header>
+  
+  <main class="main">
+    <section class="dashboard">
+      <div class="card">
+        <h2>Mempool Status</h2>
+        <p>Current Transactions: <span id="txCount">...</span></p>
+        <p>Total Size: <span id="mempoolSize">...</span></p>
+        <div class="chart" id="mempoolChart"></div>
+      </div>
+      <div class="card">
+        <h2>Block Status</h2>
+        <p>Latest Block: <span id="latestBlock">...</span></p>
+        <p>Block Time: <span id="blockTime">...</span></p>
+        <div class="chart" id="blockChart"></div>
+      </div>
+    </section>
+    
+    <section class="transactions">
+      <h2>Recent Transactions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Size</th>
+            <th>Fee (sat/vB)</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="txTableBody">
+          <!-- Transactions will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Simulated data fetching and updating
+    function fetchMempoolData() {
+      // In a real implementation, this would fetch data from an API
+      return {
+        txCount: Math.floor(Math.random() * 5000) + 1000,
+        mempoolSize: (Math.random() * 100 + 10).toFixed(2) + " MB",
+        chartData: Array.from({length: 24}, () => Math.floor(Math.random() * 5000))
+      };
+    }
+
+    function fetchBlockData() {
+      return {
+        latestBlock: "#" + (700000 + Math.floor(Math.random() * 1000)),
+        blockTime: Math.floor(Math.random() * 10) + 1 + " minutes ago",
+        chartData: Array.from({length: 24}, () => Math.floor(Math.random() * 3000))
+      };
+    }
+
+    function fetchTransactions() {
+      return Array.from({length: 10}, (_, i) => ({
+        id: [...Array(64)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+        size: Math.floor(Math.random() * 1000) + 200,
+        fee: (Math.random() * 100 + 1).toFixed(2),
+        time: Math.floor(Math.random() * 60) + " minutes ago"
+      }));
+    }
+
+    function updateDashboard() {
+      const mempoolData = fetchMempoolData();
+      const blockData = fetchBlockData();
+      
+      document.getElementById('txCount').textContent = mempoolData.txCount.toLocaleString();
+      document.getElementById('mempoolSize').textContent = mempoolData.mempoolSize;
+      document.getElementById('latestBlock').textContent = blockData.latestBlock;
+      document.getElementById('blockTime').textContent = blockData.blockTime;
+      
+      updateChart('mempoolChart', 'Mempool Size Over Time', mempoolData.chartData);
+      updateChart('blockChart', 'Block Size Over Time', blockData.chartData);
+      
+      updateTransactionTable();
+    }
+
+    function updateChart(chartId, label, data) {
+      const ctx = document.getElementById(chartId).getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array.from({length: 24}, (_, i) => i + 1 + 'h'),
+          datasets: [{
+            label: label,
+            data: data,
+            borderColor: '#3e95cd',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    function updateTransactionTable() {
+      const transactions = fetchTransactions();
+      const tableBody = document.getElementById('txTableBody');
+      tableBody.innerHTML = '';
+      transactions.forEach(tx => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = tx.id.substr(0, 10) + '...';
+        row.insertCell(1).textContent = tx.size + ' bytes';
+        row.insertCell(2).textContent = tx.fee + ' sat/vB';
+        row.insertCell(3).textContent = tx.time;
+      });
+    }
+
+    // Initial update and set interval for continuous updates
+    updateDashboard();
+    setInterval(updateDashboard, 30000); // Update every 30 seconds
+  </script>
+</body></html>
