@@ -19,7 +19,10 @@ def parse_blockchain_info(output):
     return {
         'chain': blockchain_info['chain'],
         'blocks': blockchain_info['blocks'],
-        'bestblockhash': blockchain_info['bestblockhash']
+        'bestblockhash': blockchain_info['bestblockhash'],
+        'time': blockchain_info['time'],
+        'mediantime': blockchain_info['mediantime'],
+        'size_on_disk':blockchain_info['size_on_disk']
     }
 
 def main():
@@ -30,6 +33,9 @@ def main():
     print(f"- Chain: {parsed_info['chain']}")
     print(f"- Blocks: {parsed_info['blocks']}")
     print(f"- Best Block Hash: {parsed_info['bestblockhash']}")
+    print(f"- Time: {parsed_info['time']}")
+    print(f"- Mediantime {parsed_info['mediantime']}")
+    print(f"- Disk Space: {parsed_info['size_on_disk']}")
 
 if __name__ == "__main__":
     main()
