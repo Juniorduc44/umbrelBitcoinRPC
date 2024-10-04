@@ -1,0 +1,26 @@
+Improve the integration between main.py and mempool.html to create a real-time GUI for blockchain information:
+
+Modify main.py to:
+a) Start a local web server (e.g., using Flask or a simple HTTP server).
+b) Serve the mempool.html file as the main page.
+c) Create an API endpoint that returns the parsed blockchain information as JSON.
+d) Run the core query and update the blockchain information at regular intervals.
+Update mempool.html to:
+a) Fetch the blockchain data from the API endpoint using JavaScript.
+b) Populate the HTML elements with the received data.
+c) Implement automatic refresh to keep the display updated.
+Ensure that when main.py is executed, it:
+a) Automatically starts the web server.
+b) Opens the default web browser to display mempool.html.
+c) Continues running to serve updated blockchain information.
+Maintain the existing structure of mempool.html, using the provided cube layout and styling.
+Map the data from main.py to the appropriate elements in mempool.html:
+
+Use 'blocks' for #blockHeight
+Use 'time' for #lastupdate in the format of hours:mins:seconds:milliseconds
+Add relevant data to other fields like #lastUpdate, #mempoolValue, etc.
+
+
+Handle any potential errors gracefully, such as the core query failing or the web server encountering issues.
+
+The goal is to create a seamless experience where running main.py immediately provides a live, browser-based interface showing real-time blockchain information, utilizing the existing HTML structure and Python logic.
